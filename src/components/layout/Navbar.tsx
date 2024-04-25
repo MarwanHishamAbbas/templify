@@ -88,6 +88,10 @@ const Navbar = async ({}) => {
                 </div>
               )}
               <div className="space-y-4">
+                <Link href="/create-product" className={buttonVariants({})}>
+                  <Home className="size-5" />
+                  Create Product
+                </Link>
                 <Link
                   href="/"
                   className={buttonVariants({

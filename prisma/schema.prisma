@@ -50,6 +50,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    Product       Product[]
 }
 
 model VerificationToken {
@@ -70,4 +71,16 @@ model Post {
     createdById String
 
     @@index([name])
+}
+
+model Product {
+    id          Int     @id @default(autoincrement())
+    name        String
+    imageUrl    String
+    author      User    @relation(fields: [userId], references: [id])
+    paid        Boolean @default(false)
+    price       Int?
+    demoLink    String?
+    description String
+    userId      String
 }

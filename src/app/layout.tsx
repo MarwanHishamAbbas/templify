@@ -30,7 +30,7 @@ export default async function RootLayout({
             <Navbar />
             <main className="flex gap-6">
               <SideBar />
-              {children}
+              <div className="basis-full">{children}</div>
             </main>
           </main>
         </TRPCReactProvider>

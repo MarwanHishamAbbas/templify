@@ -1,6 +1,7 @@
-import { Button } from "~/components/ui/button";
-import { Card } from "~/components/ui/card";
-
 export default async function Home() {
-  return <main></main>;
+  return (
+    <main>
+      <h1>homepage</h1>
+    </main>
+  );
 }
