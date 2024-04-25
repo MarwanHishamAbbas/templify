@@ -5,6 +5,7 @@ import { Urbanist } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "~/components/layout/Navbar";
 import SideBar from "~/components/layout/SideBar";
+import { Toaster } from "~/components/ui/sonner";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default async function RootLayout({
               <SideBar />
               <div className="basis-full">{children}</div>
             </main>
+            <Toaster />
           </main>
         </TRPCReactProvider>
       </body>

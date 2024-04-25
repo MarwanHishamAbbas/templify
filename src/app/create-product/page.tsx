@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
+import { useDropzone } from "@uploadthing/react";
+
 import {
   Form,
   FormControl,
@@ -13,19 +15,23 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 
-import { z } from "zod";
 import { Card, CardContent } from "~/components/ui/card";
-import { PackagePlus } from "lucide-react";
-import { useState } from "react";
+import { Check, Loader2, PackagePlus } from "lucide-react";
+import { useCallback, useState } from "react";
 import {
-  TCreateProductSchema,
+  type TCreateProductSchema,
   createProductSchema,
 } from "~/lib/validator/product";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
+import { UploadDropzone } from "~/lib/uploadthing";
+import { toast } from "sonner";
+import Image from "next/image";
 
 const CreateProductPage = () => {
   const [values, setValues] = useState<TCreateProductSchema>();
+  const [imageUrl, setImageUrl] = useState<string>("");
+
   // 1. Define your form.
   const form = useForm<TCreateProductSchema>({
     resolver: zodResolver(createProductSchema),
@@ -36,8 +42,13 @@ const CreateProductPage = () => {
   function onSubmit(values: TCreateProductSchema) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    if (imageUrl.length === 0) {
+      toast.warning("You should upload an Image");
+      return;
+    }
     setValues(values);
   }
+
   return (
     <>
       <Card>
@@ -138,9 +149,40 @@ const CreateProductPage = () => {
                 )}
               />
 
+              <UploadDropzone
+                config={{ mode: "auto" }}
+                onUploadBegin={() => {
+                  toast.loading("Uploading assets", { id: "upload" });
+                }}
+                onClientUploadComplete={(file) => {
+                  setImageUrl(file[0]?.url ?? "");
+                  toast.dismiss();
+                  toast.success("Upload Completed!");
+                }}
+                appearance={{
+                  button: "hidden",
+                  label:
+                    "text-foreground hover:text-foreground/50 transition-all",
+                  container: "border-2 border-border",
+                  uploadIcon: "text-muted-foreground",
+                  allowedContent: "text-muted-foreground",
+                }}
+                endpoint="imageUploader"
+                content={{
+                  uploadIcon: imageUrl.length !== 0 && (
+                    <Image
+                      src={imageUrl ?? ""}
+                      alt="Image"
+                      width={100}
+                      height={100}
+                    />
+                  ),
+                }}
+              />
+
               {/* Submit Button */}
               <Button type="submit" className="w-full">
-                Create Product <PackagePlus className="size-5" />{" "}
+                Create Product <PackagePlus className="size-5 " />{" "}
               </Button>
             </form>
           </Form>
