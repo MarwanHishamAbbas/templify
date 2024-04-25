@@ -1,10 +1,12 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Urbanist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import Navbar from "~/components/layout/Navbar";
+import SideBar from "~/components/layout/SideBar";
 
-const inter = Inter({
+const urbanist = Urbanist({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -22,8 +24,16 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body className={`font-sans ${urbanist.variable} `}>
+        <TRPCReactProvider>
+          <main className="mx-auto max-w-5xl space-y-6 px-3 py-10">
+            <Navbar />
+            <main className="flex gap-6">
+              <SideBar />
+              {children}
+            </main>
+          </main>
+        </TRPCReactProvider>
       </body>
     </html>
   );
