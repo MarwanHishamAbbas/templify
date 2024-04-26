@@ -1,6 +1,7 @@
 import { createProductSchema } from "~/lib/validator/product";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { z } from "zod";
+import { QueryValidator } from "~/lib/validator/query";
 
 export const productRouter = createTRPCRouter({
   create: protectedProcedure
@@ -22,5 +23,19 @@ export const productRouter = createTRPCRouter({
         },
       });
       return newProduct;
+    }),
+  products: publicProcedure
+    .input(QueryValidator)
+    .query(async ({ input, ctx }) => {
+      const { category, limit } = input;
+      const allProducts = await ctx.db.product.findMany({
+        take: limit,
+        where: {
+          category: {
+            equals: category ?? undefined,
+          },
+        },
+      });
+      return allProducts;
     }),
 });

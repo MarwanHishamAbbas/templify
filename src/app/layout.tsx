@@ -27,14 +27,15 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`font-sans ${urbanist.variable} `}>
         <TRPCReactProvider>
-          <main className="mx-auto max-w-5xl space-y-6 px-3 py-10">
+          <div className="mx-auto max-w-7xl space-y-6 px-3 py-10 ">
             <Navbar />
-            <main className="flex gap-6">
+            <div className="flex gap-6">
               <SideBar />
+
               <div className="basis-full">{children}</div>
-            </main>
+            </div>
             <Toaster />
-          </main>
+          </div>
         </TRPCReactProvider>
       </body>
     </html>

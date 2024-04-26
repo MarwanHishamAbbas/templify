@@ -5,7 +5,7 @@ import { Button, buttonVariants } from "../ui/button";
 
 const SideBar = ({}) => {
   return (
-    <aside className="hidden basis-1/5 lg:block">
+    <div className="hidden basis-1/5 lg:inline-block">
       <Card>
         <CardContent className="space-y-4">
           <Link href="/create-product" className={buttonVariants({})}>
@@ -69,7 +69,7 @@ const SideBar = ({}) => {
           </Button>
         </CardContent>
       </Card>
-    </aside>
+    </div>
   );
 };
 

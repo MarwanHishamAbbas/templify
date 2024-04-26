@@ -79,20 +79,98 @@ const CreateProductPage = () => {
   }
 
   return (
-    <>
-      <Card>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <Card>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Product Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ex...Nexus Framer Template"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {createProductSchema.shape.category._def.values.map(
+                        (select, idx) => (
+                          <SelectItem key={idx} value={select}>
+                            {select}
+                          </SelectItem>
+                        ),
+                      )}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="paid"
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <FormLabel>Select a type...</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={false}
+                      className="flex flex-col space-y-1"
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value={true} />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Premium Product
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value={false} />
+                        </FormControl>
+                        <FormLabel className="font-normal">Freebie</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {form.watch("paid") && (
               <FormField
                 control={form.control}
-                name="name"
+                name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Product Name</FormLabel>
+                    <FormLabel>Price</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Ex...Nexus Framer Template"
+                        required={form.watch("paid")}
+                        placeholder="Enter a price in USD"
                         {...field}
                       />
                     </FormControl>
@@ -100,113 +178,35 @@ const CreateProductPage = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {createProductSchema.shape.category._def.values.map(
-                          (select, idx) => (
-                            <SelectItem key={idx} value={select}>
-                              {select}
-                            </SelectItem>
-                          ),
-                        )}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="paid"
-                render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel>Select a type...</FormLabel>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={false}
-                        className="flex flex-col space-y-1"
-                      >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value={true} />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            Premium Product
-                          </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value={false} />
-                          </FormControl>
-                          <FormLabel className="font-normal">Freebie</FormLabel>
-                        </FormItem>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {form.watch("paid") && (
-                <FormField
-                  control={form.control}
-                  name="price"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Price</FormLabel>
-                      <FormControl>
-                        <Input
-                          required={form.watch("paid")}
-                          placeholder="Enter a price in USD"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            )}
+            <FormField
+              control={form.control}
+              name="demoLink"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Demo Link</FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://example.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
-              <FormField
-                control={form.control}
-                name="demoLink"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Demo Link</FormLabel>
-                    <FormControl>
-                      <Input placeholder="https://example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Product Description</FormLabel>
-                    <FormControl>
-                      <Textarea {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Product Description</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Write a description" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
+            <div>
               <UploadDropzone
                 onUploadError={(error) => {
                   if (error.code === "INTERNAL_CLIENT_ERROR") {
@@ -226,7 +226,7 @@ const CreateProductPage = () => {
                   button: "hidden",
                   label:
                     "text-foreground hover:text-foreground/50 transition-all",
-                  container: "border-2 border-border",
+                  container: "border-2 border-border min-w-auto",
                   uploadIcon: "text-muted-foreground",
                   allowedContent: "text-muted-foreground",
                 }}
@@ -242,16 +242,16 @@ const CreateProductPage = () => {
                   ),
                 }}
               />
+            </div>
 
-              {/* Submit Button */}
-              <Button type="submit" className="w-full" disabled={isPending}>
-                Create Product <PackagePlus className="size-5 " />
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-    </>
+            {/* Submit Button */}
+            <Button type="submit" className="w-full" disabled={isPending}>
+              Create Product <PackagePlus className="size-5 " />
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 };
 

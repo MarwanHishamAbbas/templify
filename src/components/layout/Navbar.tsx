@@ -25,7 +25,7 @@ const Navbar = async ({}) => {
   const session = await getServerAuthSession();
 
   return (
-    <Card className="flex h-16 items-center justify-between ">
+    <Card className="flex h-16 items-center justify-between">
       <TemplifyLogo />
       {/* Desktop Version */}
       <div className="hidden lg:block">
