@@ -1,7 +1,9 @@
+import { CreatePost } from "./_components/create-post";
+
 export default async function Home() {
   return (
     <main>
-      <h1>homepage</h1>
+      <CreatePost />
     </main>
   );
 }

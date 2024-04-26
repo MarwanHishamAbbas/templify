@@ -76,11 +76,12 @@ model Post {
 model Product {
     id          Int     @id @default(autoincrement())
     name        String
+    category    String
     imageUrl    String
-    author      User    @relation(fields: [userId], references: [id])
+    author      User    @relation(fields: [authorId], references: [id])
     paid        Boolean @default(false)
     price       Int?
     demoLink    String?
     description String
-    userId      String
+    authorId    String
 }

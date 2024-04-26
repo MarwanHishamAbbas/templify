@@ -3,7 +3,13 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import { useDropzone } from "@uploadthing/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 
 import {
   Form,
@@ -16,8 +22,8 @@ import {
 import { Input } from "~/components/ui/input";
 
 import { Card, CardContent } from "~/components/ui/card";
-import { Check, Loader2, PackagePlus } from "lucide-react";
-import { useCallback, useState } from "react";
+import { PackagePlus } from "lucide-react";
+import { useState } from "react";
 import {
   type TCreateProductSchema,
   createProductSchema,
@@ -27,9 +33,10 @@ import { Textarea } from "~/components/ui/textarea";
 import { UploadDropzone } from "~/lib/uploadthing";
 import { toast } from "sonner";
 import Image from "next/image";
+import Loader from "~/components/common/Loader";
+import { api } from "~/trpc/react";
 
 const CreateProductPage = () => {
-  const [values, setValues] = useState<TCreateProductSchema>();
   const [imageUrl, setImageUrl] = useState<string>("");
 
   // 1. Define your form.
@@ -37,16 +44,38 @@ const CreateProductPage = () => {
     resolver: zodResolver(createProductSchema),
     defaultValues: {
       name: "",
+      demoLink: "",
+      description: "",
+      paid: false,
+      price: "0",
     },
   });
-  function onSubmit(values: TCreateProductSchema) {
+  const { mutate: createProduct, isPending } = api.product.create.useMutation({
+    onMutate: () => {
+      toast.loading("Creating a product");
+    },
+    onSuccess: (data) => {
+      console.log(data);
+
+      toast.success("Product Created!");
+    },
+    onSettled: () => {
+      toast.dismiss();
+    },
+    onError: (error) => {
+      if (error.data?.code === "UNAUTHORIZED") {
+        toast.warning("You Should login in first");
+      }
+    },
+  });
+  async function onSubmit(values: TCreateProductSchema) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     if (imageUrl.length === 0) {
       toast.warning("You should upload an Image");
       return;
     }
-    setValues(values);
+    createProduct({ ...values, imageUrl: imageUrl });
   }
 
   return (
@@ -67,6 +96,35 @@ const CreateProductPage = () => {
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {createProductSchema.shape.category._def.values.map(
+                          (select, idx) => (
+                            <SelectItem key={idx} value={select}>
+                              {select}
+                            </SelectItem>
+                          ),
+                        )}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -127,7 +185,7 @@ const CreateProductPage = () => {
                 name="demoLink"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Demo Link (optional)</FormLabel>
+                    <FormLabel>Demo Link</FormLabel>
                     <FormControl>
                       <Input placeholder="https://example.com" {...field} />
                     </FormControl>
@@ -150,6 +208,11 @@ const CreateProductPage = () => {
               />
 
               <UploadDropzone
+                onUploadError={(error) => {
+                  if (error.code === "INTERNAL_CLIENT_ERROR") {
+                    toast.error("Please Login in First");
+                  }
+                }}
                 config={{ mode: "auto" }}
                 onUploadBegin={() => {
                   toast.loading("Uploading assets", { id: "upload" });
@@ -181,14 +244,13 @@ const CreateProductPage = () => {
               />
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full">
-                Create Product <PackagePlus className="size-5 " />{" "}
+              <Button type="submit" className="w-full" disabled={isPending}>
+                Create Product <PackagePlus className="size-5 " />
               </Button>
             </form>
           </Form>
         </CardContent>
       </Card>
-      <pre className="mt-20">{JSON.stringify(values, null, 2)}</pre>
     </>
   );
 };

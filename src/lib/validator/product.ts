@@ -1,8 +1,16 @@
-import { nullable, z } from "zod";
+import { z } from "zod";
 
 export const createProductSchema = z.object({
   name: z.string().min(2, "Reqiured"),
   paid: z.boolean().default(false),
+  category: z.enum([
+    "AI",
+    "Photography",
+    "Startup",
+    "Ecommerce",
+    "Agency",
+    "Portfolio",
+  ]),
   price: z
     .string()
     .refine(
@@ -14,7 +22,7 @@ export const createProductSchema = z.object({
       },
     )
     .optional(),
-  demoLink: z.string().url().optional(),
+  demoLink: z.string().url(),
   description: z.string().max(5000, "Description is too long"),
 });
 
