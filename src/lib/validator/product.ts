@@ -23,7 +23,7 @@ export const createProductSchema = z.object({
     )
     .optional(),
   demoLink: z.string().url(),
-  description: z.string().max(5000, "Description is too long"),
+  description: z.string(),
 });
 
 export type TCreateProductSchema = z.infer<typeof createProductSchema>;

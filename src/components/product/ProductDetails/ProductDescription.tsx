@@ -10,7 +10,10 @@ const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => {
     // To Be MDX Later
     <Card className="basis-full">
       <CardContent>
-        <article className="text-muted">{description}</article>
+        <article
+          className="prose-sm prose-headings:text-muted prose-p:text-muted"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </CardContent>
     </Card>
   );

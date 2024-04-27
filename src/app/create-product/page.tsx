@@ -29,13 +29,12 @@ import {
   createProductSchema,
 } from "~/lib/validator/product";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { Textarea } from "~/components/ui/textarea";
+
 import { UploadDropzone } from "~/lib/uploadthing";
 import { toast } from "sonner";
 import Image from "next/image";
-import Loader from "~/components/common/Loader";
 import { api } from "~/trpc/react";
-import { SignInButton } from "../api/auth/_components/AuthButtons";
+import RichText from "~/components/ui/RichText";
 
 const CreateProductPage = () => {
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -69,11 +68,16 @@ const CreateProductPage = () => {
       }
     },
   });
+  console.log();
   async function onSubmit(values: TCreateProductSchema) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     if (imageUrl.length === 0) {
       toast.warning("You should upload an Image");
+      return;
+    }
+    if (form.watch("description").length <= 7) {
+      toast.warning("Please describe your product");
       return;
     }
     createProduct({ ...values, imageUrl: imageUrl });
@@ -193,19 +197,8 @@ const CreateProductPage = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Product Description</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Write a description" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
+            <RichText form={form} />
 
             <div>
               <UploadDropzone
