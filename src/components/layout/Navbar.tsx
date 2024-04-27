@@ -1,7 +1,7 @@
 import { getServerAuthSession } from "~/server/auth";
 import { Card } from "../ui/card";
 import TemplifyLogo from "~/assets/logo";
-import { Download, LogOut, Menu, PackagePlus } from "lucide-react";
+import { Download, Menu, PackagePlus } from "lucide-react";
 import {
   Sheet,
   SheetClose,
@@ -114,7 +114,7 @@ const Navbar = async ({}) => {
                 <hr className="my-2" />
                 <SheetClose asChild>
                   <Link
-                    href="/templates"
+                    href="/products"
                     className={buttonVariants({
                       variant: "ghost",
                       className: "w-full !justify-start",

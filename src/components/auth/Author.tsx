@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import { type FC } from "react";
 import { api } from "~/trpc/server";
+import { buttonVariants } from "../ui/button";
 
 interface AuthorProps {
   userId: string;
@@ -9,7 +11,13 @@ interface AuthorProps {
 const Author: FC<AuthorProps> = async ({ userId }) => {
   const author = await api.auth.getUserById(userId);
   return (
-    <div className=" flex items-center gap-1.5">
+    <Link
+      href={`/authors/${author?.id}`}
+      className={buttonVariants({
+        variant: "ghost",
+        className: "flex items-center pl-0",
+      })}
+    >
       <Image
         className="rounded-full"
         src={author?.image ?? ""}
@@ -18,7 +26,7 @@ const Author: FC<AuthorProps> = async ({ userId }) => {
         height={35}
       />
       <h4 className="text-sm font-medium text-muted">{author?.name}</h4>
-    </div>
+    </Link>
   );
 };
 

@@ -13,7 +13,7 @@ interface ProductPriceProps {
 const ProductPrice: FC<ProductPriceProps> = ({ priceData }) => {
   const { paid, price } = priceData;
   return (
-    <Card className=" -order-1 w-full lg:order-2 lg:basis-1/3">
+    <Card className="-order-1 w-full lg:order-2 lg:basis-1/3">
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">

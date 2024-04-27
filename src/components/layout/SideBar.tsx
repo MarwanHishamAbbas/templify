@@ -35,7 +35,7 @@ const SideBar = ({}) => {
           </Link>
           <hr className="my-2" />
           <Link
-            href="/templates"
+            href="/products"
             className={buttonVariants({
               variant: "ghost",
               className: "w-full !justify-start",
