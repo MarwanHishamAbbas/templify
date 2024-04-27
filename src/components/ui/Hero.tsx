@@ -17,11 +17,11 @@ const Hero = () => {
           Over 1065+ Premade Framer Templates
         </Button>
         <div className="space-y-4 lg:w-3/4">
-          <h1 className="text-3xl font-semibold lg:text-4xl">
+          <h1 className="text-3xl font-semibold lg:text-5xl">
             Get <span className="text-primary">Framer</span> Ready Made
             Templates
           </h1>
-          <p className="text-muted">
+          <p className="text-muted lg:w-3/4">
             With a team of dedicated professionals who are passionate about
             crafting online experiences, we&apos;re here to elevate your online
             presence and bring your vision to life.

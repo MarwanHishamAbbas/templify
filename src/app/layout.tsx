@@ -27,7 +27,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`font-sans ${urbanist.variable} `}>
         <TRPCReactProvider>
-          <div className="mx-auto max-w-7xl space-y-6 px-3 py-10 ">
+          <div className="mx-auto max-w-[1360px] space-y-6 px-3 py-10 ">
             <Navbar />
             <div className="flex gap-6">
               <SideBar />

@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import ProductHero from "~/components/product/ProductHero";
+import ProductContent from "~/components/product/ProductDetails/ProductContent";
+import ProductHero from "~/components/product/ProductDetails/ProductHero";
 import { api } from "~/trpc/server";
 
 interface PageProps {
@@ -15,9 +16,14 @@ const Page: FC<PageProps> = async ({ params }) => {
   if (!product) return;
 
   return (
-    <main>
+    <div className="space-y-4">
       <ProductHero product={product} />
-    </main>
+      <ProductContent
+        description={product.description}
+        paid={product.paid}
+        price={product.price ?? 0}
+      />
+    </div>
   );
 };
 

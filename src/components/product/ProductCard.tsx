@@ -20,7 +20,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
             alt={product.name}
             width={1000}
             height={1000}
-            className="h-[150px] w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-110"
+            className="h-[150px] w-full rounded-lg object-cover"
           />
           <Button
             size={"sm"}
@@ -29,8 +29,16 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
           >
             {product.paid ? "Pro" : "Free"}
           </Button>
-          <Author userId={product.authorId} />
-          <h1 className="text-lg font-semibold capitalize">{product.name}</h1>
+          <div className="flex items-center justify-between">
+            <Author userId={product.authorId} />
+            <p className="font-semibold text-muted">
+              ${product.paid ? product.price : 0}
+            </p>
+          </div>
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg font-semibold capitalize">{product.name}</h1>
+            <p className="text-muted-foreground">{product.category}</p>
+          </div>
         </CardContent>
       </Card>
     </Link>

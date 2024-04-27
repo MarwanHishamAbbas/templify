@@ -9,7 +9,7 @@ import Author from "~/components/auth/Author";
 
 import { Button, buttonVariants } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
-import Spinner from "../common/Spinner";
+import Spinner from "../../common/Spinner";
 
 interface ProductHeroProps {
   product: Product | null;

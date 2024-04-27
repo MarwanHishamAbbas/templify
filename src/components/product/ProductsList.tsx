@@ -13,7 +13,7 @@ const ProductsList: FC<ProductsListProps> = async ({ query }) => {
   const products = await api.product.products({ category, limit });
   return (
     <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-      {products.map((product) => (
+      {products.reverse().map((product) => (
         <ProductCard product={product} key={product.id} />
       ))}
     </div>
