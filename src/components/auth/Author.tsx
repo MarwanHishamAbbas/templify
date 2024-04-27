@@ -9,17 +9,15 @@ interface AuthorProps {
 const Author: FC<AuthorProps> = async ({ userId }) => {
   const author = await api.auth.getUserById(userId);
   return (
-    <div className="flex items-center gap-1.5">
+    <div className=" flex items-center gap-1.5">
       <Image
         className="rounded-full"
         src={author?.image ?? ""}
         alt={author?.name ?? ""}
-        width={40}
-        height={40}
+        width={35}
+        height={35}
       />
-      <h4 className="text-sm font-medium text-muted-foreground">
-        {author?.name}
-      </h4>
+      <h4 className="text-sm font-medium text-muted">{author?.name}</h4>
     </div>
   );
 };

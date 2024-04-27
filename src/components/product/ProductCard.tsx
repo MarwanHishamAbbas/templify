@@ -12,15 +12,15 @@ interface ProductCardProps {
 
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
   return (
-    <Link key={product.id} href={`/products/${product.id}`}>
+    <Link key={product.id} href={`/products/${product.id}`} className="group">
       <Card>
-        <CardContent className="relative space-y-2">
+        <CardContent className="relative space-y-2 overflow-hidden">
           <Image
             src={product.imageUrl}
             alt={product.name}
-            width={500}
-            height={500}
-            className="h-[150px] w-full rounded-lg object-cover"
+            width={1000}
+            height={1000}
+            className="h-[150px] w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-110"
           />
           <Button
             size={"sm"}

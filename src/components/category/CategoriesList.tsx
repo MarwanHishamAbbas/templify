@@ -17,7 +17,7 @@ const CategoriesList = () => {
                 className: "!size-14 !rounded-full",
                 size: "icon",
               })}
-              href={`/products?cateogry=${category}`}
+              href={`/products?category=${category}`}
             >
               <ArrowUpRight className="text-primary" />
             </Link>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const TemplifyLogo = () => {
+const TemplifyLogo = ({ textVisible = true }: { textVisible?: boolean }) => {
   return (
     <Link href="/" className="flex items-center gap-2">
       <svg
@@ -71,7 +71,9 @@ const TemplifyLogo = () => {
           </clipPath>
         </defs>
       </svg>
-      <h1 className="hidden text-xl font-medium lg:block">Templify</h1>
+      {textVisible && (
+        <h1 className="hidden text-xl font-medium lg:block">Templify</h1>
+      )}
     </Link>
   );
 };

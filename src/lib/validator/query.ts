@@ -3,7 +3,8 @@ import { z } from "zod";
 export const QueryValidator = z.object({
   category: z
     .enum(["AI", "Photography", "Startup", "Ecommerce", "Agency", "Portfolio"])
-    .nullable(),
+    .nullable()
+    .optional(),
   limit: z.number().optional(),
 });
 

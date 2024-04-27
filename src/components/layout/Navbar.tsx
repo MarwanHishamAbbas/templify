@@ -1,9 +1,10 @@
 import { getServerAuthSession } from "~/server/auth";
 import { Card } from "../ui/card";
 import TemplifyLogo from "~/assets/logo";
-import { Download, LogOut, Menu } from "lucide-react";
+import { Download, LogOut, Menu, PackagePlus } from "lucide-react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTrigger,
@@ -77,72 +78,88 @@ const Navbar = async ({}) => {
               ) : (
                 <div className="flex flex-col gap-4">
                   <SignInButton />
-
-                  <Link
-                    className={buttonVariants({ variant: "ghost" })}
-                    href="submit"
-                  >
-                    <Download className="size-5" />
-                    Submit Your Template
-                  </Link>
+                  <SheetClose asChild>
+                    <Link
+                      className={buttonVariants({ variant: "ghost" })}
+                      href="submit"
+                    >
+                      <Download className="size-5" />
+                      Submit Your Template
+                    </Link>
+                  </SheetClose>
                 </div>
               )}
               <div className="space-y-4">
-                <Link href="/create-product" className={buttonVariants({})}>
-                  <Home className="size-5" />
-                  Create Product
-                </Link>
-                <Link
-                  href="/"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    className: "w-full !justify-start",
-                  })}
-                >
-                  <Home className="size-5" />
-                  Home
-                </Link>
+                <SheetClose asChild>
+                  <Link
+                    href="/create-product"
+                    className={buttonVariants({ className: "w-full" })}
+                  >
+                    <PackagePlus className="size-5" />
+                    Create Product
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className: "w-full !justify-start",
+                    })}
+                  >
+                    <Home className="size-5" />
+                    Home
+                  </Link>
+                </SheetClose>
                 <hr className="my-2" />
-                <Link
-                  href="/templates"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    className: "w-full !justify-start",
-                  })}
-                >
-                  <Compass className="size-5" />
-                  Explore Templates
-                </Link>
-                <Link
-                  href="/products"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    className: "w-full !justify-start",
-                  })}
-                >
-                  <Zap className="size-5" />
-                  Latest Products
-                </Link>
-                <Link
-                  href="/categories"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    className: "w-full !justify-start",
-                  })}
-                >
-                  <Verified className="size-5" />
-                  All Categories
-                </Link>
-                <Link
-                  href="/authors"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    className: "w-full !justify-start",
-                  })}
-                >
-                  <Users className="size-5" />
-                  Our Authors
-                </Link>
+                <SheetClose asChild>
+                  <Link
+                    href="/templates"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className: "w-full !justify-start",
+                    })}
+                  >
+                    <Compass className="size-5" />
+                    Explore Templates
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/products"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className: "w-full !justify-start",
+                    })}
+                  >
+                    <Zap className="size-5" />
+                    Latest Products
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/categories"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className: "w-full !justify-start",
+                    })}
+                  >
+                    <Verified className="size-5" />
+                    All Categories
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/authors"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className: "w-full !justify-start",
+                    })}
+                  >
+                    <Users className="size-5" />
+                    Our Authors
+                  </Link>
+                </SheetClose>
                 <Button size={"lg"} className="w-full">
                   <Tag className="size-5" />
                   All Access Pack

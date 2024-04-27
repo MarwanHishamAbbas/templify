@@ -35,6 +35,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import Loader from "~/components/common/Loader";
 import { api } from "~/trpc/react";
+import { SignInButton } from "../api/auth/_components/AuthButtons";
 
 const CreateProductPage = () => {
   const [imageUrl, setImageUrl] = useState<string>("");

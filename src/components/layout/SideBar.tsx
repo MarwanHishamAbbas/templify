@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { Card, CardContent } from "../ui/card";
-import { Compass, Home, Tag, Users, Verified, Zap } from "lucide-react";
+import {
+  Compass,
+  Home,
+  PackagePlus,
+  Tag,
+  Users,
+  Verified,
+  Zap,
+} from "lucide-react";
 import { Button, buttonVariants } from "../ui/button";
 
 const SideBar = ({}) => {
@@ -8,8 +16,11 @@ const SideBar = ({}) => {
     <div className="hidden basis-1/5 lg:inline-block">
       <Card>
         <CardContent className="space-y-4">
-          <Link href="/create-product" className={buttonVariants({})}>
-            <Home className="size-5" />
+          <Link
+            href="/create-product"
+            className={buttonVariants({ className: "w-full" })}
+          >
+            <PackagePlus className="size-5" />
             Create Product
           </Link>
           <Link
