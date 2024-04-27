@@ -58,23 +58,31 @@ const Navbar = async ({}) => {
             <SheetHeader className="space-y-4">
               {session?.user && <SignOutButton />}
               {session?.user ? (
-                <div className="flex items-center gap-1.5">
-                  <Image
-                    className="rounded-full"
-                    src={session?.user?.image ?? ""}
-                    alt={session?.user?.name ?? ""}
-                    width={40}
-                    height={40}
-                  />
-                  <div>
-                    <h4 className="text-sm font-medium">
-                      {session?.user?.name}
-                    </h4>
-                    <p className="text-xs text-muted-foreground">
-                      {session?.user?.email}
-                    </p>
-                  </div>
-                </div>
+                <SheetClose asChild>
+                  <Link
+                    className={buttonVariants({
+                      className: "flex items-center gap-1.5",
+                      variant: "ghost",
+                    })}
+                    href="/account"
+                  >
+                    <Image
+                      className="rounded-full"
+                      src={session?.user?.image ?? ""}
+                      alt={session?.user?.name ?? ""}
+                      width={40}
+                      height={40}
+                    />
+                    <div>
+                      <h4 className="text-sm font-medium">
+                        {session?.user?.name}
+                      </h4>
+                      <p className="text-xs text-muted-foreground">
+                        {session?.user?.email}
+                      </p>
+                    </div>
+                  </Link>
+                </SheetClose>
               ) : (
                 <div className="flex flex-col gap-4">
                   <SignInButton />

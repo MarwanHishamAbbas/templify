@@ -11,7 +11,7 @@ const Hero = () => {
         <Button
           variant={"secondary"}
           size={"sm"}
-          className="pointer-events-none text-xs text-muted-foreground"
+          className="pointer-events-none text-xs text-muted"
         >
           <PartyPopper className="size-5 text-primary" />
           Over 1065+ Premade Framer Templates
