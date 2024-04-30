@@ -13,7 +13,7 @@ import { Button, buttonVariants } from "../ui/button";
 
 const SideBar = ({}) => {
   return (
-    <div className="hidden basis-1/5 lg:inline-block">
+    <aside className="hidden basis-1/5 lg:inline">
       <Card>
         <CardContent className="space-y-4">
           <Link
@@ -80,7 +80,7 @@ const SideBar = ({}) => {
           </Button>
         </CardContent>
       </Card>
-    </div>
+    </aside>
   );
 };
 

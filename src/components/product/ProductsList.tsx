@@ -6,11 +6,15 @@ import ProductCard from "./ProductCard";
 
 interface ProductsListProps {
   query: TQueryValidator;
+  authorId?: string | null;
 }
 
-const ProductsList: FC<ProductsListProps> = async ({ query }) => {
+const ProductsList: FC<ProductsListProps> = async ({ query, authorId }) => {
   const { category, limit } = query;
-  const products = await api.product.products({ category, limit });
+  let products = await api.product.products({ category, limit });
+  if (authorId) {
+    products = await api.auth.getUserProducts(authorId);
+  }
   return (
     <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
       {products.reverse().map((product) => (

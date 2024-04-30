@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "~/components/layout/Navbar";
 import SideBar from "~/components/layout/SideBar";
 import { Toaster } from "~/components/ui/sonner";
+import Layout from "~/components/layout/Layout";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -27,12 +28,11 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`font-sans ${urbanist.variable} `}>
         <TRPCReactProvider>
-          <div className="mx-auto max-w-[1360px] space-y-6 px-3 py-10 ">
+          <div className=" mx-auto max-w-[1360px] space-y-6 px-3 py-10">
             <Navbar />
-            <div className="flex gap-6">
+            <div className=" flex gap-6">
               <SideBar />
-
-              <div className="basis-full">{children}</div>
+              <Layout>{children}</Layout>
             </div>
             <Toaster />
           </div>

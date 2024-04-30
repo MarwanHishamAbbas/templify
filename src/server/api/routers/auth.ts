@@ -20,4 +20,16 @@ export const authRotuer = createTRPCRouter({
       });
       return user;
     }),
+  getUserProducts: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input: authorId }) => {
+      const authorProducts = await ctx.db.product.findMany({
+        where: {
+          authorId: {
+            equals: authorId,
+          },
+        },
+      });
+      return authorProducts;
+    }),
 });
