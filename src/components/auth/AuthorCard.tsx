@@ -4,7 +4,7 @@ import Image from "next/image";
 import { type FC } from "react";
 
 interface AuthorCardProps {
-  author: User | null;
+  author: User | null | undefined;
 }
 
 const AuthorCard: FC<AuthorCardProps> = ({ author }) => {

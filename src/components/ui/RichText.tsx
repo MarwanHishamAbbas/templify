@@ -5,17 +5,31 @@ import StarterKit from "@tiptap/starter-kit";
 import { Button } from "./button";
 import { type UseFormReturn } from "react-hook-form";
 import { type TCreateProductSchema } from "~/lib/validator/product";
+import { type TContentSchema } from "~/app/account/_components/AccountSummary";
+import { SeparatorHorizontal } from "lucide-react";
 
-const RichText = ({ form }: { form: UseFormReturn<TCreateProductSchema> }) => {
+const RichText = ({
+  form,
+  accountForm,
+}: {
+  form?: UseFormReturn<TCreateProductSchema>;
+  accountForm?: UseFormReturn<TContentSchema>;
+}) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: "Describe your product",
     onBeforeCreate: () => {
-      form.register("description");
+      form?.register("description");
+      if (accountForm) {
+        accountForm.register("content");
+      }
     },
     onUpdate: () => {
       if (!editor) return;
-      form.setValue("description", editor?.getHTML());
+      form?.setValue("description", editor?.getHTML());
+      if (accountForm) {
+        accountForm.setValue("content", editor.getHTML());
+      }
     },
     editorProps: {
       attributes: {
@@ -108,6 +122,16 @@ const RichText = ({ form }: { form: UseFormReturn<TCreateProductSchema> }) => {
           }
         >
           h6
+        </Button>
+        <Button
+          size={"sm"}
+          type="button"
+          onClick={() => editor?.commands.setHorizontalRule()}
+          variant={
+            editor?.isActive("heading", { level: 6 }) ? "default" : "outline"
+          }
+        >
+          <SeparatorHorizontal className="size-5" />
         </Button>
       </div>
 
