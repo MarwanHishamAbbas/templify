@@ -1,5 +1,4 @@
 import { type User } from "@prisma/client";
-import { Edit } from "lucide-react";
 import React from "react";
 import AuthorCard from "~/components/auth/AuthorCard";
 import ProductsList from "~/components/product/ProductsList";
@@ -27,10 +26,7 @@ const AccountPage = async () => {
             </div>
           </div>
           <hr />
-          <AccountSummary
-            content="<h1>Hello, Marwan</h1>"
-            userId={session?.user.id}
-          />
+          <AccountSummary userId={session?.user.id} />
 
           <hr />
           <ProductsList authorId={session?.user.id} query={{}} />

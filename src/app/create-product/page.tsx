@@ -68,7 +68,7 @@ const CreateProductPage = () => {
       }
     },
   });
-  console.log();
+
   async function onSubmit(values: TCreateProductSchema) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.

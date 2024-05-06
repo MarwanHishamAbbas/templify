@@ -18,8 +18,8 @@ const TemplifyLogo = ({ textVisible = true }: { textVisible?: boolean }) => {
           rx="15.2"
           fill="#00FF66"
         />
-        <g clip-path="url(#clip0_3_9)">
-          <g clip-path="url(#clip1_3_9)">
+        <g clipPath="url(#clip0_3_9)">
+          <g clipPath="url(#clip1_3_9)">
             <mask
               id="mask0_3_9"
               style={{

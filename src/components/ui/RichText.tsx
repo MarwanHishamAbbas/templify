@@ -11,13 +11,15 @@ import { SeparatorHorizontal } from "lucide-react";
 const RichText = ({
   form,
   accountForm,
+  content,
 }: {
   form?: UseFormReturn<TCreateProductSchema>;
   accountForm?: UseFormReturn<TContentSchema>;
+  content?: string;
 }) => {
   const editor = useEditor({
     extensions: [StarterKit],
-    content: "Describe your product",
+    content: content,
     onBeforeCreate: () => {
       form?.register("description");
       if (accountForm) {

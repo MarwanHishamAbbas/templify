@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { revalidatePath } from "next/cache";
 
 export const authRotuer = createTRPCRouter({
   getAllUsers: publicProcedure
@@ -31,5 +32,13 @@ export const authRotuer = createTRPCRouter({
         },
       });
       return authorProducts;
+    }),
+  updateUserSummary: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input: summaryContent, ctx }) => {
+      await ctx.db.user.update({
+        where: { id: ctx.session.user.id },
+        data: { summary: summaryContent },
+      });
     }),
 });
