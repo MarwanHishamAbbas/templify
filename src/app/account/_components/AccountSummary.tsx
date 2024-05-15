@@ -40,7 +40,7 @@ const AccountSummary: FC<AccountSummaryProps> = ({ userId }) => {
   const form = useForm<TContentSchema>({
     resolver: zodResolver(contentSchema),
     defaultValues: {
-      content: user?.summary as string,
+      content: user?.summary ?? "",
     },
   });
 
@@ -63,7 +63,7 @@ const AccountSummary: FC<AccountSummaryProps> = ({ userId }) => {
       {isEditing ? (
         <Form {...form}>
           <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
-            <RichText accountForm={form} content={user?.summary as string} />
+            <RichText accountForm={form} content={user?.summary ?? ""} />
             <Button
               type="submit"
               className="w-full lg:w-auto"
@@ -79,7 +79,7 @@ const AccountSummary: FC<AccountSummaryProps> = ({ userId }) => {
         <article
           className="prose-sm prose-headings:text-muted prose-p:text-muted"
           dangerouslySetInnerHTML={{
-            __html: user?.summary as string,
+            __html: user?.summary ?? "",
           }}
         />
       )}

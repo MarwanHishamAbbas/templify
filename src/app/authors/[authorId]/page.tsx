@@ -34,7 +34,7 @@ const AuthorPage: FC<AuthorPageProps> = async ({ params }) => {
         <article
           className="prose-sm prose-headings:text-muted prose-p:text-muted"
           dangerouslySetInnerHTML={{
-            __html: "<h1>Hello, Marwan</h1>",
+            __html: author?.summary ?? "",
           }}
         />
         <hr />
