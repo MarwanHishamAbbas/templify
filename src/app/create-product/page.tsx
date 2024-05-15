@@ -147,7 +147,7 @@ const CreateProductPage = () => {
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value={true} />
+                          <RadioGroupItem value={true ?? "true"} />
                         </FormControl>
                         <FormLabel className="font-normal">
                           Premium Product
@@ -155,7 +155,7 @@ const CreateProductPage = () => {
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value={false} />
+                          <RadioGroupItem value={false ?? "false"} />
                         </FormControl>
                         <FormLabel className="font-normal">Freebie</FormLabel>
                       </FormItem>
