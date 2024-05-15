@@ -28,7 +28,6 @@ import {
   type TCreateProductSchema,
   createProductSchema,
 } from "~/lib/validator/product";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 
 import { UploadDropzone } from "~/lib/uploadthing";
 import { toast } from "sonner";
@@ -67,8 +66,6 @@ const CreateProductPage = () => {
       }
     },
   });
-
-  console.log(typeof form.watch("paid"));
 
   async function onSubmit(values: TCreateProductSchema) {
     // Do something with the form values.
@@ -134,37 +131,7 @@ const CreateProductPage = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="paid"
-              render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <FormLabel>Select a type...</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      className="flex flex-col space-y-1"
-                    >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={true ?? "true"} />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Premium Product
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={false ?? "false"} />
-                        </FormControl>
-                        <FormLabel className="font-normal">Freebie</FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
             {form.watch("paid") && (
               <FormField
                 control={form.control}
