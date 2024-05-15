@@ -46,7 +46,6 @@ const CreateProductPage = () => {
       name: "",
       demoLink: "",
       description: "",
-      paid: false,
       price: "0",
     },
   });
@@ -68,6 +67,8 @@ const CreateProductPage = () => {
       }
     },
   });
+
+  console.log(typeof form.watch("paid"));
 
   async function onSubmit(values: TCreateProductSchema) {
     // Do something with the form values.

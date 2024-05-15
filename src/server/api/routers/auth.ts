@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { revalidatePath } from "next/cache";
 
 export const authRotuer = createTRPCRouter({
   getAllUsers: publicProcedure
