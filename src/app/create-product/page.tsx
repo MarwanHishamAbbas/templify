@@ -131,26 +131,6 @@ const CreateProductPage = () => {
                 </FormItem>
               )}
             />
-
-            {form.watch("paid") && (
-              <FormField
-                control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Price</FormLabel>
-                    <FormControl>
-                      <Input
-                        required={form.watch("paid")}
-                        placeholder="Enter a price in USD"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
             <FormField
               control={form.control}
               name="demoLink"

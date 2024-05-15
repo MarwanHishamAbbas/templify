@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const createProductSchema = z.object({
   name: z.string().min(2, "Reqiured"),
-  paid: z.boolean(),
   category: z.enum([
     "AI",
     "Photography",
